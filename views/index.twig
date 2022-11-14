@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<form method="post" action="http://localhost:3000/produit"> 
+<br> Libelle : <input type="text" name="Libelle" /> <br> 
+<br> Price : <input type="number" name="Prix" /><br>
+<br> Description : <input type="text" name="Description" /><br>
+<br> Quantite : <input type="number" name="Quantite" /><br>
+<br> Stock : <label>
+<input type=checkbox> OUI</label>
+<label><input type=checkbox> NON </label><br>
+<button type="submit"> Ajouter produit </button>
+</form>
+{% endblock %}

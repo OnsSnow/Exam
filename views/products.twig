@@ -1,0 +1,86 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+  
+	<h1 style="text-align:center;">Produit - Examen </h1>
+    <hr/>
+	<form method="post" action="http://localhost:3000/users/add">
+		<table style="margin:auto;">
+			<tr>
+				<td>
+					<label>Libelle</label>
+				</td>
+				<td>
+					<input type="text" name="libelle"/><br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Price</label>
+				</td>
+				<td>
+					<input type="number" name="price"/><br>
+				</td>
+			</tr>
+ 			<tr>
+				<td>
+					<label>Description</label>
+				</td>
+				<td>
+					<input type="text" name="description"/><br>
+				</td>
+			</tr> 
+			<tr>
+				<td>
+					<label>Quantite</label>
+				</td>
+				<td>
+					<input type="number" name="quantite"/><br>
+				</td>
+			</tr>
+ 			<tr>                      
+			<tr>
+				<td colspan="2">
+					<button type="submit">Ajouter</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<table border="1" style="margin:auto;">
+        <tr>
+            <td colspan="2">
+                <a href="#">Liste des Produits</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Libelle</td>
+            <td>Price</td>
+            <td>Description</td>
+            <td>Quantite</td>
+        </tr>
+        {% for produit in produit %}
+        <tr>
+            <td>{{produit.Libelle}}</td>
+            <td>{{produit.Price}}</td>
+            <td>{{produit.Description}}</td>
+            <td>{{produit.Quantite}}</td>
+            <td>
+            <button onclick="sendNotification()"><a href="http://localhost:3000/users/deleteUser/{{produit._id}}">Supprimer</a></button>
+        </tr>
+        {% endfor %}
+    </table>
+    <script>
+       function sendNotification(){
+        var socket = io('http://localhost:3000');
+        var notification = "Product deleted successfully";
+        socket.emit('notification', notification);
+    }
+       {# This will be a comment #}
+    </script>
+{% endblock %}
